@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catastro macro campamento Los Arenales</title>
+    <!-- Agregar enlaces a las bibliotecas de Leaflet y sus estilos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Agregar el script de la biblioteca de Google Sheets API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
+    <link rel="icon" href=""> <!--Icono en la pestaña-->
+     <!--Estilos CSS-->
+     <link rel="stylesheet" href="./assests/css/style.css">
+     <!--Bootstrap-->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+     <!--JQuery-->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!--Iconos desde Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <section>
+        <form id="miFormulario">
+            <div class="seccion">
+              <h2>I. IDENTIFICACIÓN DE LA VIVIENDA</h2>
+        
+              <label for="campamento">1. Nombre del campamento:</label>
+              <input type="text" id="campamento" name="campamento" required>
+        
+              <label for="ubicacion">2. Ubicación georreferenciada:</label>
+              <input type="text" id="ubicacion" name="ubicacion" required>
+             
+        
+                <label for="ubicacion">2. Ubicación georreferenciada:</label>
+                <div id="mapa" style="width: 100%; height: 400px;"></div>
+                <input type="hidden" id="ubicacion" name="ubicacion" required>
+                
+        
+              <label for="ocupacion">4. Estado de ocupación de la vivienda:</label><br>
+              <input type="radio" id="ocupacion1" name="ocupacion" value="Ocupada sin moradores presentes" required>
+              <label for="ocupacion1">Ocupada sin moradores presentes</label><br>
+              <input type="radio" id="ocupacion2" name="ocupacion" value="Vacía o desocupada" required>
+              <label for="ocupacion2">Vacía o desocupada</label><br>
+              <input type="radio" id="ocupacion3" name="ocupacion" value="Ocupada con moradores presentes que no contestan" required>
+              <label for="ocupacion3">Ocupada con moradores presentes que no contestan</label><br>
+              <input type="radio" id="ocupacion4" name="ocupacion" value="Ocupada con moradores presentes que contestan" required>
+              <label for="ocupacion4">Ocupada con moradores presentes que contestan</label><br>
+              <input type="radio" id="ocupacion5" name="ocupacion" value="Sitio no construido" required>
+              <label for="ocupacion5">Sitio no construido</label><br>
+              <label for="uso_complementario">5a. ¿Le da un uso complementario a su vivienda?</label><br>
+            
+            <input type="radio" id="uso_complementario1" name="uso_complementario" value="Sí">
+            <label for="uso_complementario1">Sí</label><br>
+            <input type="radio" id="uso_complementario2" name="uso_complementario" value="No">
+            <label for="uso_complementario2">No</label><br>
+            <input type="radio" id="uso_complementario3" name="uso_complementario" value="No sabe/No responde">
+            <label for="uso_complementario3">No sabe/No responde</label><br>
+
+            <label for="uso_complementario_cual">5b. Indique cuál:</label><br>
+            <input type="text" id="uso_complementario_cual" name="uso_complementario_cual"><br>
+
+            <label for="comite">6. Comité al que pertenece:</label><br>
+            <select id="comite" name="comite">
+            <option value="Comité Chilenos Villa el Sol">Comité Chilenos Villa el Sol</option>
+            <option value="Comité Nuevo Sol Naciente">Comité Nuevo Sol Naciente</option>
+            <option value="Comité Desierto Florido del Norte">Comité Desierto Florido del Norte</option>
+            <option value="Comité Migrantes Unidos">Comité Migrantes Unidos</option>
+            <option value="Comité Garras de León del Desierto">Comité Garras de León del Desierto</option>
+            <option value="Comité El Bosque">Comité El Bosque</option>
+            <option value="Comité El Ranchito">Comité El Ranchito</option>
+            <option value="Comité de allegados Eulogio Gordo campamento III etapa">Comité de allegados Eulogio Gordo campamento III etapa</option>
+            <option value="Comité Vencedoras">Comité Vencedoras</option>
+            <option value="Comité Esperanza de los Niños">Comité Esperanza de los Niños</option>
+            <option value="Comité El Encanto">Comité El Encanto</option>
+            <option value="Comité Rayito de Sol">Comité Rayito de Sol</option>
+            <option value="Catastro macro campamento Los Arenales">Catastro macro campamento Los Arenales</option>
+            <option value="Comité Sueño de Esperanza">Comité Sueño de Esperanza</option>
+            <option value="Comité La Unión del Norte">Comité La Unión del Norte</option>
+            <option value="Comité Nuevo Amanecer Latino">Comité Nuevo Amanecer Latino</option>
+            <option value="Comité Rayito de Esperanza">Comité Rayito de Esperanza</option>
+            <option value="No pertenezco a un comité de vivienda">No pertenezco a un comité de vivienda</option>
+            <option value="No sabe/No responde">No sabe/No responde</option>
+            </select><br>
+            <label for="tipo_vivienda">7. Tipo de vivienda:</label><br>
+            <select id="tipo_vivienda" name="tipo_vivienda">
+                 <option value="Vivienda consolidada (con estructura, materiales nuevos y terminaciones)">Vivienda consolidada (con estructura, materiales nuevos y terminaciones)</option>
+                <option value="Vivienda semi consolidada (con estructura, materiales nuevos y reciclados, pero sin terminaciones del tipo pintura, moldura, piso u otro)">Vivienda semi consolidada (con estructura, materiales nuevos y reciclados, pero sin terminaciones del tipo pintura, moldura, piso u otro)</option>
+                <option value="Vivienda semi precaria (con estructura frágil, con materiales reciclados y sin terminaciones, como mediagua o similar)">Vivienda semi precaria (con estructura frágil, con materiales reciclados y sin terminaciones, como mediagua o similar)</option>
+                <option value="Vivienda precaria (sin estructura y materiales informales como lata, cartón, plástico, etc; carpas o viviendas móviles)">Vivienda precaria (sin estructura y materiales informales como lata, cartón, plástico, etc; carpas o viviendas móviles)</option>
+                <option value="Otros (carpa, contenedor, automóvil o similar)">Otros (carpa, contenedor, automóvil o similar)</option>
+              </select><br>
+              
+              <label for="cantidad_habitantes">8. ¿Cuántas personas habitan en la vivienda?</label><br>
+              1) 0 - 7 años: <input type="number" id="edad_0_7" name="edad_0_7"><br>
+              2) 8 - 17 años: <input type="number" id="edad_8_17" name="edad_8_17"><br>
+              3) 18 - 59 años: <input type="number" id="edad_18_59" name="edad_18_59"><br>
+              4) 60 años y más: <input type="number" id="edad_60_mas" name="edad_60_mas"><br>
+              
+              <label for="pendiente_encuesta">9. ¿Pendiente de encuesta?</label><br>
+              <input type="radio" id="pendiente_encuesta1" name="pendiente_encuesta" value="Sí">
+              <label for="pendiente_encuesta1">Sí</label><br>
+              <input type="radio" id="pendiente_encuesta2" name="pendiente_encuesta" value="No">
+              <label for="pendiente_encuesta2">No</label><br>
+              
+              <label for="faltan_datos">10. ¿Faltan datos? (Incompleta)</label><br>
+              <input type="radio" id="faltan_datos1" name="faltan_datos" value="Sí">
+              <label for="faltan_datos1">Sí</label><br>
+              <input type="radio" id="faltan_datos2" name="faltan_datos" value="No">
+              <label for="faltan_datos2">No</label><br>
+              
+              <input type="submit" value="Enviar">
+              </div>
+        </form>    
+
+    </section>
+    <br><!--Salto-->
+    <section>
+        <div class="container">
+                <footer>
+                    <a class="" href="#">
+                        <img src="" alt="" class="logo_esquina">
+                      </a>
+                    <p>Elaborado por Dann LeBeau</p>
+                    <p>Todos los derechos reservados &copy; 2023</p>
+                    <ul class="social-icons">
+                      <li><a href="#"><i class="fab fa-facebook icon"></i></a></li>
+                      <li><a href="#"><i class="fab fa-twitter icon"></i></a></li>
+                      <li><a href="#"><i class="fab fa-instagram icon"></i></a></li>
+                      <li><a href="#"><i class="fab fa-github icon"></i></a></li>
+                    </ul>
+                </footer>
+        </div>
+    </section>
+    <!--Codigo Javascript-->
+    <script src="./assests/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
+</body>
+</html>
